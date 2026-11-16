@@ -1,0 +1,13 @@
+jupyterlab
+ipykernel
+numpy
+scipy
+pandas
+matplotlib
+seaborn
+scikit-learn
+astropy
+astroquery
+pyvo
+lightkurve
+reproject

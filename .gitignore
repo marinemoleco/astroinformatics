@@ -1,0 +1,41 @@
+# The repository contains only: projects/, docs/ (without PDFs), shared/, requirements.txt,
+# README.md and the licence files. Everything else stays local.
+
+# Blog (stays local, not published on GitHub)
+blog/
+
+# Downloaded data stay local (notebooks download them again). Only the ADQL query files are public.
+data/*
+!data/raw/
+data/raw/*
+!data/raw/*.adql
+
+# Literature: only the shared bibliography is public, never the (copyrighted) PDFs
+docs/literature/*
+!docs/literature/references.bib
+
+# Jupyter and Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.venv/
+venv/
+envs/
+
+# Credentials of any kind (FTP, tokens, keys)
+.env
+.env.*
+*.pem
+*.key
+*.token
+.netrc
+*credentials*
+*secret*
+*password*
+ftp*.txt
+ftp*.json
+
+# Logs and OS clutter
+*.log
+Thumbs.db
+desktop.ini
