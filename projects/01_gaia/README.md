@@ -1,8 +1,8 @@
-# Gaia Pleiades (notebooks 01 to 04)
+# 01 Gaia (notebooks 01 to 04, then DR4 repeat)
 
 Status: in progress (literature step and notebook 1 done, notebook 2 next). Last updated: 2026-11-16.
 
-Notebooks are numbered consecutively across all topics; this topic uses 01 to 04. Figures start with the notebook number, new ADQL files too.
+Topic 01. Notebooks are numbered within this topic (01, 02, ...); figures start with the notebook number. New files in `data/` and commit messages use `01-NN` (for example `data/raw/01-02_pleiades_cone_dr3.adql`, commit `01-02: ...`). Rules: `docs/NAMING.md`.
 
 ## Question
 1. What does the HR diagram of the solar neighborhood (within 100 pc) look like in Gaia DR3, and how complete is a simple, quality-cut sample?
@@ -31,7 +31,7 @@ Details, numbers and references: `literature.md`.
 - [ ] Notebook 2: Pleiades query and HDBSCAN membership
 - [ ] Notebook 3: Pleiades distance and parallax zero point
 - [ ] Notebook 4: isochrone age
-- [ ] Repeat 2 to 4 with Gaia DR4
+- [ ] Repeat 2 to 4 with Gaia DR4 (as notebooks 05 ff.)
 
 ## Files
 - `literature.md`: state of knowledge, methods, data problems, open questions

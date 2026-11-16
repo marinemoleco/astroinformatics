@@ -16,10 +16,10 @@ Last updated: 2026-11-16. Master copy lives here on H:. This file is updated at 
 ## 2. Where things are
 - `H:\Astronomie\data\raw\` downloaded data, never modified
 - `H:\Astronomie\data\processed\` cleaned tables and intermediate results
-- `H:\Astronomie\projects\<topic>\` one folder per topic, without number (for example `gaia_pleiades`): `README.md`, `literature.md`, `notebooks\`, `figures\`
+- `H:\Astronomie\projects\<TT_topic>\` one folder per topic, with the topic number (for example `01_gaia`): `README.md`, `literature.md`, `notebooks\`, `figures\`. Naming rules: `docs\NAMING.md`
 - `H:\Astronomie\shared\config.py` base path and helpers (change the drive letter here only)
 - `H:\Astronomie\shared\gaia_tools.py` cached Gaia archive queries and Gaia quality-cut helpers
-- `H:\Astronomie\docs\` this runbook, changelog, `GLOSSARY.md`, `literature\references.bib` (shared bibliography for Zotero)
+- `H:\Astronomie\docs\` this runbook, changelog, `NAMING.md`, `GLOSSARY.md`, `literature\references.bib` (shared bibliography for Zotero)
 - `D:\Astronomie\envs\astro\` Python virtual environment
 - `D:\Astronomie\backup\` backups of notebooks, figures and docs
 
@@ -75,8 +75,8 @@ The GitHub repository (section 10) is an additional copy of notebooks, figures, 
 - `git push` says "Authentication failed": the browser login was not completed. Repeat the push and log in to GitHub in the browser window. Passwords and tokens never go into the chat or into files.
 
 ## 8. Working with Claude
-- One chat per notebook inside the Claude project "Astroinformatics". Chat names: "<NN> <Topic>, Notebook <N>", for example "02 Gaia Pleiades, Notebook 2". Chats numbered 00 are for setup and planning (for example "00 GitHub-Setup").
-- Numbering: notebooks are numbered consecutively across all topics (01, 02, 03, ...). The same number is used for the notebook file (`02_pleiades_membership.ipynb`), the figure prefix (`02_...png`), new ADQL files, the commit message (`02: ...`), the tag (`nb02`) and the chat name. Topic folders carry no number.
+- One chat per notebook inside the Claude project "Astroinformatics". Chat names: "TT Topic, Short description, Notebook N", for example "01 Gaia, Pleiades query and HDBSCAN, Notebook 2". Blog chats: "01 Gaia, Neighbourhood, Blog Part 1". Chats numbered 00 are for setup and planning (for example "00 GitHub-Setup Hobby Astronomy").
+- Numbering (full rules in `docs\NAMING.md`): each topic has a number `TT`, notebooks count within the topic (`NN` = 01, 02, ...). Inside the topic folder `NN` is enough (`projects\01_gaia\notebooks\02_pleiades_membership.ipynb`, `figures\02_...png`). Where all topics meet, `TT-NN` is used: new files in `data\` (`01-02_pleiades_cone_dr3.adql`), commit messages (`01-02: ...`), tags (`01-02`) and chat names.
 - Every analysis starts with a literature step (see `docs\literature\`).
 - At the end of each session Claude updates: the project README, this runbook if tools changed, `CHANGELOG.md`, and the glossary.
 - Model and effort: Claude points out at phase transitions when to switch (end of its reply, one line). Rule of thumb: Opus 5.5 (optionally Fable 5.2) at high effort for the literature step, method design, interpretation and hard debugging; Sonnet 5.5 at medium effort for notebooks, plots and queries; Sonnet 5.5 or Haiku 5.5 at low effort for docs and small edits.
@@ -84,15 +84,17 @@ The GitHub repository (section 10) is an additional copy of notebooks, figures, 
 - If Claude cannot see the local folder in a new chat, the folder has to be connected again (Add folder in the Claude desktop app).
 
 ## 9. Topics
-| Topic | Folder | Notebooks | Question | Status |
-|-------|--------|-----------|----------|--------|
-| Gaia Pleiades | `projects\gaia_pleiades` | 01 to 04 | Neighborhood HR diagram, membership and age of the Pleiades | in progress: literature and notebook 01 done, notebook 02 next |
-| TESS transit | `projects\tess_transit` | from 05 | Transit fit of a known planet candidate | planned |
-| Galaxies | planned | | Color versus morphology (SDSS, Galaxy Zoo) | planned |
-| Visual | planned | | Color image from public FITS data | planned |
+Topic numbers are assigned when a topic starts (see `docs\NAMING.md`).
+
+| TT | Topic | Folder | Notebooks | Question | Status |
+|----|-------|--------|-----------|----------|--------|
+| 01 | Gaia | `projects\01_gaia` | 01 to 04, then DR4 repeat (05 ff.) | Neighbourhood HR diagram, membership, distance and age of the Pleiades | in progress: literature and notebook 01 done, notebook 02 next |
+| next | TESS transit | `projects\TT_tess` | from 01 | Transit fit of a known planet candidate | planned |
+| later | Galaxies | assigned at start | | Colour versus morphology (SDSS, Galaxy Zoo) | planned |
+| later | Visual | assigned at start | | Colour image from public FITS data | planned |
 
 ## 10. GitHub (public repository)
-Repository: https://github.com/marinemoleco/astroinformatics (public, created 2026-11-16). It is one repository for everything. Each topic is a folder `projects\<topic>`. `H:\Astronomie` is the working copy.
+Repository: https://github.com/marinemoleco/astroinformatics (public, created 2026-11-16). It is one repository for everything. Each topic is a folder `projects\<TT_topic>`. `H:\Astronomie` is the working copy.
 
 In the repository: `projects\`, `docs\` (from `literature\` only `references.bib`), `shared\`, `data\raw\*.adql` (the exact queries), `requirements.txt`, `README.md`, `LICENSE` (MIT, code) and `LICENSE-CC-BY-4.0.md` (texts and figures).
 Not in the repository (listed in `.gitignore`): `blog\` (stays local), everything in `data\` except the `.adql` files, the literature PDFs (copyright), notebook checkpoints, caches and credentials of any kind.
@@ -105,21 +107,21 @@ Write the CHANGELOG entry first, so that it is part of the commit. Then:
 cd /d H:\Astronomie
 git status
 git add -A
-git commit -m "02: Pleiades cone query (work in progress)"
+git commit -m "01-02: Pleiades cone query (work in progress)"
 git push
 ```
 - Read the `git status` list before `git add -A`. Nothing from `blog\`, no `.fits`, no `.pdf`, no credentials may appear. If something does, do not commit and ask Claude.
-- Commit messages are in English and start with the notebook number (`02:`), or `docs:` and `shared:` for changes there.
+- Commit messages are in English and start with topic and notebook number (`01-02:`), or `docs:` and `shared:` for changes there.
 - Undo staging of one file: `git restore --staged <file>`. Undo the last commit before the push, keeping all files: `git reset --soft HEAD~1`.
 
 ### Milestones and links from blog posts
-- When a notebook is finished, mark the state with a tag, for example `git tag nb02` and then `git push origin nb02`.
+- When a notebook is finished, mark the state with a tag `TT-NN`, for example `git tag 01-02` and then `git push origin 01-02`.
 - A blog post links to the notebook with the commit, not with `main`, so that the link always shows the version the post describes:
-  `https://github.com/marinemoleco/astroinformatics/blob/<commit>/projects/gaia_pleiades/notebooks/<notebook>.ipynb`
+  `https://github.com/marinemoleco/astroinformatics/blob/<commit>/projects/01_gaia/notebooks/<notebook>.ipynb`
   Take `<commit>` from `git log --oneline` (the 7 characters are enough). The commit must be pushed before the post is published.
 
 ### Rules
 - Notebooks are saved with their outputs. Claude checks the outputs for local paths and personal data before each commit. If the repository grows beyond about 200 MB, switch to `nbstripout` and keep the figures in `figures\`.
-- New ADQL files start with the number of the notebook that first uses them, for example `02_pleiades_cone_dr3.adql`. The topic README lists the queries it uses.
+- New ADQL files start with topic and notebook number of the notebook that first uses them, for example `01-02_pleiades_cone_dr3.adql`. The topic README lists the queries it uses.
 - Raw data (`.fits`) stay local. The notebooks download them again.
 - Not set up, to be proposed first: a Zenodo DOI per release, GitHub Actions.

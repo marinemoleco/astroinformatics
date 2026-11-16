@@ -2,6 +2,15 @@
 
 Newest entries on top. One entry per working session: what was done, what was decided, what changed in the setup.
 
+## 2026-11-16: 00 Naming and numbering (topic-based scheme)
+- Replaced the consecutive notebook numbering across topics (decided the same morning) by a topic-based scheme. New single source of rules: `docs\NAMING.md`.
+- Topics carry a number `TT` (assigned at start; `00` = setup and planning). Notebooks count within their topic (`NN`). Inside the topic folder `NN` is enough (notebook files, figures); where all topics meet, `TT-NN` is used (new files in `data\`, commit messages, tags, chat names).
+- Topic folder becomes `projects\01_gaia` (rename with `git mv` in the GitHub chat). Notebook 01 and its figures keep their names. TESS starts at notebook 01 of its own topic, not at 05. The DR4 repeat continues as notebooks 05 ff. of topic 01.
+- Chat names: "TT Topic, Short description, Notebook N" and "TT Topic, Short description, Blog Part K".
+- Blog: titles and post URLs without numbers ("About me and this project", "Gaia Part 1: The neighbourhood"), list sorted by date, then title (Quarto sorts alphabetically by title otherwise). Done in the blog chat.
+- Updated: `README.md`, `docs\RUNBOOK.md` (sections 2, 8, 9, 10), topic `README.md`, `literature.md` title, `D:\Astronomie\backup\README.md`, Claude project docs. Not yet done: folder rename and path in notebook 01 (GitHub chat), blog (blog chat).
+- Done in the GitHub chat: folder renamed with `git mv projects\gaia_pleiades projects\01_gaia`, the code line in notebook 01 changed from `config.project_dir("gaia_pleiades")` to `config.project_dir("01_gaia")` (the stored output of its first run keeps the old path), and the finished notebook 1 is tagged `01-01`.
+
 ## 2026-11-16: GitHub repository and documentation workflow
 - Public repository `marinemoleco/astroinformatics` created and pushed (first commit 007ce59, 22 files, page checked in the browser). One repository for all projects, each analysis a folder under `projects\`.
 - Decisions: the blog stays local and is not published on GitHub. In the repository: `projects`, `docs` (only `references.bib`, never the literature PDFs), `shared`, `requirements.txt`, the ADQL files in `data\raw`, README and licences. Raw and processed data stay local. Notebooks are stored with their outputs (2 MB for notebook 1); reconsider `nbstripout` beyond about 200 MB. Commit e-mail: the iba-science.de address. Licences: MIT for code, CC BY 4.0 for texts and figures (notice with link to the legal text, not the full text).

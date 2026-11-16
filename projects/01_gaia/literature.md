@@ -1,4 +1,4 @@
-# 01 Gaia Pleiades: literature step
+# 01 Gaia: literature step (Pleiades and solar neighbourhood)
 
 Last updated: 2026-11-15. Written before any code (phase 0). BibTeX keys refer to `docs/literature/references.bib`.
 

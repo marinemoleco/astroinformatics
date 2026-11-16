@@ -13,16 +13,18 @@ Selected analyses are also written up on the blog: https://astronomy.iba-science
 
 ## Topics and notebooks
 
-Notebooks are numbered consecutively across all topics (01, 02, 03, ...). The number appears in the
-notebook file name, the figure names, the commit message and the name of the working session, so each
-notebook can be found under one number. The topic folders carry no number.
+Each topic has a two-digit number (`TT`), and its notebooks are numbered within the topic (`NN` = 01,
+02, ...). Inside a topic folder the notebook number is enough (`projects/01_gaia/notebooks/02_...ipynb`,
+`figures/02_...png`). Where all topics meet, the full form `TT-NN` is used: new data and query files in
+`data/` (`01-02_...adql`), commit messages (`01-02: ...`) and tags (`01-02`). Full rules:
+`docs/NAMING.md`. Topic numbers are assigned when a topic starts.
 
-| Topic | Folder | Notebooks | Question | Status |
-|-------|--------|-----------|----------|--------|
-| Gaia Pleiades | `projects/gaia_pleiades` | 01 to 04 (01 done) | HR diagram of the solar neighbourhood, membership and age of the Pleiades (Gaia DR3, later DR4) | in progress |
-| TESS transit | `projects/tess_transit` (planned) | from 05 | Transit fit of a known TESS planet candidate | planned |
-| Galaxies | planned | | Galaxy colour versus morphology (SDSS, Galaxy Zoo) | planned |
-| Visual | planned | | Colour image from public FITS data | planned |
+| TT | Topic | Folder | Notebooks | Question | Status |
+|----|-------|--------|-----------|----------|--------|
+| 01 | Gaia | `projects/01_gaia` | 01 to 04 (01 done), then repeat with DR4 | HR diagram of the solar neighbourhood, membership, distance and age of the Pleiades (Gaia DR3, later DR4) | in progress |
+| next | TESS transit | assigned at start | | Transit fit of a known TESS planet candidate | planned |
+| later | Galaxies | assigned at start | | Galaxy colour versus morphology (SDSS, Galaxy Zoo) | planned |
+| later | Visual | assigned at start | | Colour image from public FITS data | planned |
 
 Each topic folder has its own `README.md` (question, background, method, steps, results, open points),
 a `literature.md` (state of knowledge), `notebooks/` and `figures/`.
@@ -30,8 +32,8 @@ a `literature.md` (state of knowledge), `notebooks/` and `figures/`.
 ## Repository layout
 
 ```
-projects/    one folder per topic: gaia_pleiades, ...
-docs/        RUNBOOK.md (how to work), CHANGELOG.md (one entry per session),
+projects/    one folder per topic, with topic number: 01_gaia, ...
+docs/        RUNBOOK.md (how to work), NAMING.md (naming rules), CHANGELOG.md (one entry per session),
              GLOSSARY.md, literature/references.bib (shared bibliography)
 shared/      reusable helpers: config.py (base path), gaia_tools.py (cached Gaia queries)
 data/raw/    the ADQL query files (exact query, archive, date and row count of each download)
