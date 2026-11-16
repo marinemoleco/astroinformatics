@@ -11,22 +11,26 @@ found. Corrections are welcome as GitHub issues.
 
 Selected analyses are also written up on the blog: https://astronomy.iba-science.de
 
-## Projects
+## Topics and notebooks
 
-| No. | Folder | Question | Status |
-|-----|--------|----------|--------|
-| 01 | `projects/01_gaia_pleiades` | HR diagram of the solar neighbourhood, membership and age of the Pleiades (Gaia DR3, later DR4) | in progress |
-| 02 | planned | Transit fit of a known TESS planet candidate | planned |
-| 03 | planned | Galaxy colour versus morphology (SDSS, Galaxy Zoo) | planned |
-| 04 | planned | Colour image from public FITS data | planned |
+Notebooks are numbered consecutively across all topics (01, 02, 03, ...). The number appears in the
+notebook file name, the figure names, the commit message and the name of the working session, so each
+notebook can be found under one number. The topic folders carry no number.
 
-Each project folder has its own `README.md` (question, background, method, steps, results, open points),
+| Topic | Folder | Notebooks | Question | Status |
+|-------|--------|-----------|----------|--------|
+| Gaia Pleiades | `projects/gaia_pleiades` | 01 to 04 (01 done) | HR diagram of the solar neighbourhood, membership and age of the Pleiades (Gaia DR3, later DR4) | in progress |
+| TESS transit | `projects/tess_transit` (planned) | from 05 | Transit fit of a known TESS planet candidate | planned |
+| Galaxies | planned | | Galaxy colour versus morphology (SDSS, Galaxy Zoo) | planned |
+| Visual | planned | | Colour image from public FITS data | planned |
+
+Each topic folder has its own `README.md` (question, background, method, steps, results, open points),
 a `literature.md` (state of knowledge), `notebooks/` and `figures/`.
 
 ## Repository layout
 
 ```
-projects/    one folder per analysis: 01_gaia_pleiades, ...
+projects/    one folder per topic: gaia_pleiades, ...
 docs/        RUNBOOK.md (how to work), CHANGELOG.md (one entry per session),
              GLOSSARY.md, literature/references.bib (shared bibliography)
 shared/      reusable helpers: config.py (base path), gaia_tools.py (cached Gaia queries)

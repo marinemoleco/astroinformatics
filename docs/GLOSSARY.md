@@ -1,6 +1,6 @@
 # Glossary
 
-Created 2026-11-15 (project 01). Terms in alphabetical order. Where it helps, an analogy to population genetics is given in *italics*. Analogies are aids for intuition, not exact equivalences.
+Created 2026-11-15 (notebook 01). Terms in alphabetical order. Where it helps, an analogy to population genetics is given in *italics*. Analogies are aids for intuition, not exact equivalences.
 
 **Ascertainment (selection) bias.** Distortion of a sample because the selection rule favours some objects over others. Every quality cut has one: the RUWE cut removes binaries, the BP S/N cut removes very red faint stars. *Same issue as choosing SNPs on a chip designed in one population.*
 

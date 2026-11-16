@@ -6,7 +6,7 @@ Reading limits: most entries below were read as abstracts, arXiv listing pages o
 
 ## 1. Question and why the Pleiades
 
-The Pleiades (M45, Melotte 22) are the classic benchmark open cluster: young (about 100 to 130 Myr), nearby (about 135 pc), rich (over a thousand known members) and lightly reddened. Project 01 uses them as a test with a known answer. If our pipeline (Gaia query, quality cuts, membership, distance, age) reproduces the literature values, it can be trusted for genuinely open questions later. The first notebook does not touch the Pleiades yet: it builds the HR diagram of the solar neighborhood within 100 pc, which trains the same steps on a simpler sample.
+The Pleiades (M45, Melotte 22) are the classic benchmark open cluster: young (about 100 to 130 Myr), nearby (about 135 pc), rich (over a thousand known members) and lightly reddened. This topic uses them as a test with a known answer. If our pipeline (Gaia query, quality cuts, membership, distance, age) reproduces the literature values, it can be trusted for genuinely open questions later. The first notebook does not touch the Pleiades yet: it builds the HR diagram of the solar neighborhood within 100 pc, which trains the same steps on a simpler sample.
 
 ## 2. Data: Gaia DR3 and its known problems
 

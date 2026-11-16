@@ -1,6 +1,8 @@
-# Project 01: Gaia Pleiades
+# Gaia Pleiades (notebooks 01 to 04)
 
-Status: in progress (literature step and notebook 1 done, notebook 2 next). Last updated: 2026-11-15.
+Status: in progress (literature step and notebook 1 done, notebook 2 next). Last updated: 2026-11-16.
+
+Notebooks are numbered consecutively across all topics; this topic uses 01 to 04. Figures start with the notebook number, new ADQL files too.
 
 ## Question
 1. What does the HR diagram of the solar neighborhood (within 100 pc) look like in Gaia DR3, and how complete is a simple, quality-cut sample?
