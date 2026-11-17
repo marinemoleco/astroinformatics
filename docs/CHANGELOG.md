@@ -2,6 +2,12 @@
 
 Newest entries on top. One entry per working session: what was done, what was decided, what changed in the setup.
 
+## 2026-11-16: 01 Gaia, Neighbourhood, Blog Part 1 (renamed after the new scheme)
+- Blog adapted to `docs\NAMING.md`: titles "About me and this project" and "Gaia Part 1: The neighbourhood", post folders `posts\about` and `posts\gaia-part-1-neighbourhood` (URLs without numbers), navbar link "About" updated, `index.qmd` sorts by `[date, title]` (About is listed before Gaia Part 1). `posts\_template` and `blog\README.md` ("Writing a post") follow the new scheme.
+- Gaia Part 1: the Reproduce box links notebook 01 at the fixed commit 28f2881 with the path `projects/01_gaia/...`. The text and figures are unchanged. The post had been uploaded earlier today under the old URLs (`.deploy_manifest.json`).
+- `blog\about.qmd` (superseded, not built, referenced nowhere) is to be deleted, as are the old post folders `posts\00-introduction` and `posts\01-gaia-neighbourhood` (Claude has no shell on the PC). A test render in Claude's workspace ran without errors; render, preview and upload are done by hand.
+- `deploy.py` never deletes on the server: the old folders `posts/00-introduction` and `posts/01-gaia-neighbourhood` and the file `about.html` have to be removed there by FTP.
+
 ## 2026-11-16: 00 Naming and numbering (topic-based scheme)
 - Replaced the consecutive notebook numbering across topics (decided the same morning) by a topic-based scheme. New single source of rules: `docs\NAMING.md`.
 - Topics carry a number `TT` (assigned at start; `00` = setup and planning). Notebooks count within their topic (`NN`). Inside the topic folder `NN` is enough (notebook files, figures); where all topics meet, `TT-NN` is used (new files in `data\`, commit messages, tags, chat names).
