@@ -1,0 +1,7 @@
+-- service: AIP Potsdam (Gaia partner data centre) (https://gaia.aip.de/tap)
+-- retrieved: 2026-11-18T23:30:52
+-- rows: 99524
+SELECT b.original_ext_source_id AS hip, b.source_id, b.angular_distance, b.number_of_neighbours,
+       g.parallax, g.parallax_over_error, g.phot_g_mean_mag, g.bp_rp, g.ruwe, g.astrometric_params_solved
+FROM gaiadr3.hipparcos2_best_neighbour AS b
+JOIN gaiadr3.gaia_source AS g ON g.source_id = b.source_id

@@ -1,0 +1,4 @@
+-- service: GAVO Data Center, Heidelberg (https://dc.g-vo.org/tap)
+-- retrieved: 2026-11-18T23:30:14
+-- rows: 19176
+SELECT * FROM gcns.resolvedss

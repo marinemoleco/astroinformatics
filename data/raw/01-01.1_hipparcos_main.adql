@@ -1,0 +1,5 @@
+-- service: GAVO Data Center, Heidelberg (https://dc.g-vo.org/tap)
+-- retrieved: 2026-11-18T23:30:23
+-- rows: 117955
+SELECT hipno, ra, dec, vmag, hpmag, parallax, e_parallax, sptype, multflag
+FROM hipparcos.main

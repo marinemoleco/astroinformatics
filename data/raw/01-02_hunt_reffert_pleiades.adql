@@ -1,0 +1,6 @@
+-- service: VizieR web interface via astroquery (vizier.cfa.harvard.edu), TAP was not reachable
+-- retrieved: 2026-11-18T10:06:49
+-- catalogue: Hunt & Reffert 2024, J/A+A/686/A42/members
+-- cluster: Melotte_22
+-- rows: 1721
+-- method: query_constraints; columns: ['DE_ICRS', 'GaiaDR3', 'Gmag', 'Name', 'Plx', 'Prob', 'RA_ICRS', 'inrj', 'inrt']

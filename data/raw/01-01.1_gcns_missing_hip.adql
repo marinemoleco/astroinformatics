@@ -1,0 +1,9 @@
+-- service: GAVO Data Center, Heidelberg (https://dc.g-vo.org/tap)
+-- retrieved: 2026-11-18T23:30:27
+-- rows: 1323
+SELECT m.main_id, m.ra, m.dec, m.plx_value, m.plx_bibcode, m.otype,
+       h.hipno, h.vmag, h.hpmag,
+       DISTANCE(POINT('ICRS', m.ra, m.dec), POINT('ICRS', h.ra, h.dec)) * 3600.0 AS sep_arcsec
+FROM gcns.missing_10mas AS m
+LEFT OUTER JOIN hipparcos.main AS h
+  ON 1 = CONTAINS(POINT('ICRS', h.ra, h.dec), CIRCLE('ICRS', m.ra, m.dec, 0.016666666666666666))

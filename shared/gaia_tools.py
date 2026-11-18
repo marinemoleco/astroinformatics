@@ -37,6 +37,28 @@ def _reachable(url: str, timeout: float = 10.0) -> bool:
         return False
 
 
+def _fits_safe(table: Table) -> Table:
+    """Make text columns writable to FITS.
+
+    TAP services such as GAVO return variable-length text columns. Astropy holds them as
+    object columns whose entries have different lengths, which FITS cannot store. They are
+    converted to fixed-width text; masked or missing entries become an empty string.
+    """
+    for col in table.colnames:
+        if table[col].dtype != object:
+            continue
+        values = [x for x in table[col] if x is not None and x is not np.ma.masked]
+        if not all(isinstance(x, (str, bytes, np.str_, np.bytes_)) for x in values):
+            continue  # not text (for example arrays): leave it to astropy
+        table[col] = np.array(
+            ["" if (x is None or x is np.ma.masked)
+             else (x.decode("utf-8", "replace") if isinstance(x, (bytes, np.bytes_)) else str(x))
+             for x in table[col]],
+            dtype=str,
+        )
+    return table
+
+
 def _run_tap_async(url: str, adql: str, maxrec: int, timeout: float) -> Table:
     """Submit an asynchronous TAP job, wait for it and return the result as an astropy Table."""
     import pyvo
@@ -93,6 +115,7 @@ def query_gaia_cached(adql: str, out_path, overwrite: bool = False, services=Non
 
         table.meta = {}  # server metadata can break FITS headers; provenance is stored separately
         out_path.parent.mkdir(parents=True, exist_ok=True)
+        table = _fits_safe(table)
         table.write(out_path, overwrite=True)
         stamp = _dt.datetime.now().isoformat(timespec="seconds")
         out_path.with_suffix(".adql").write_text(

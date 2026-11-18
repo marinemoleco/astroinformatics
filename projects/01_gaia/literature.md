@@ -1,6 +1,6 @@
 # 01 Gaia: literature step (Pleiades and solar neighbourhood)
 
-Last updated: 2026-11-15. Written before any code (phase 0). BibTeX keys refer to `docs/literature/references.bib`.
+Last updated: 2026-11-18 (Section 8 added for sub-notebook 01.1). Written before any code (phase 0). BibTeX keys refer to `docs/literature/references.bib`.
 
 Reading limits: most entries below were read as abstracts, arXiv listing pages or open-access excerpts. Items marked **[check]** are decisive for our method and should be read in full by the user. Items marked **[secondhand]** were taken from another paper's summary, not from the original.
 
@@ -82,6 +82,37 @@ Takeaway: "membership" is not unique. A compact core sample is right for the age
 4. **Notebook 4:** Isochrone age (PARSEC, optionally MIST) with an explicit likelihood; compare with the LDB values in Section 5; show the low-mass colour residuals.
 5. **After 2 December 2026:** repeat notebooks 2 to 4 with DR4.
 
+## 8. Literature step for sub-notebook 01.1 (2026-11-18)
+
+Purpose: give each open question of notebook 01 a reference from a paper instead of from memory, and find the tables we can compare against. Read in full from the PDFs in `docs/literature`: `Smart2021` (Sects. 4.1, 4.2, 5.5), `Roeser2019` (Sect. 2), `Babusiaux2018` (Table A.3), `HuntReffert2023` (Sects. 3.1, 3.3), `ElBadry2025ruwe` (Sects. 1 to 3). Abstract or table-description level only: everything else in this section.
+
+**8.1 Gaia's bright limit (question 1).** The GCNS paper places the bright limit of EDR3 sources with G and parallax at about G = 3 and notes that the local luminosity function of red clump giants is underestimated because objects brighter than G of about 3 are not in Gaia (`Smart2021`, Sects. 4.1.1 and 5.2). The EDR3 summary states that the fraction of bright stars missing at G < 7 is unchanged from DR2 and that the brightest EDR3 source has G = 1.73 (`Brown2021`). A recent paper on stars within 18 pc repeats that saturation degrades astrometry and photometry for G of about 6 and brighter, citing Lindegren et al. 2021 **[secondhand]**. SIMBAD lists 1245 objects with parallax above 10 mas that are not in EDR3; reasons include too faint, too bright and binarity, and for some there is no clear reason (`Smart2021`, Sect. 4.2). Independent reference for the bright end: Hipparcos (`Perryman1997`), complete to V = 7.3 to 9.0 depending on Galactic latitude and spectral type (ESA Hipparcos pages; `Raghavan2010` uses the same statement). Gaia DR3 provides the official cross-match `gaiadr3.hipparcos2_best_neighbour` (99 524 rows at AIP Potsdam).
+
+**8.2 GCNS tables (questions 2 and 3).** All on the GAVO Data Center TAP service (`https://dc.g-vo.org/tap`), source_id = Gaia (E)DR3 source_id, licence CC BY-NC 4.0:
+
+| Table | Content | Columns we need |
+|---|---|---|
+| `gcns.main` | 331 312 objects, at least 92 % of stars within 100 pc down to M9 | source_id, parallax, parallax_error, phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag, flux_over_error (G, BP, RP), phot_bp_rp_excess_factor, ruwe, ipd_frac_multi_peak, gcns_prob, wd_prob, dist_1, dist_50 |
+| `gcns.missing_10mas` | 1258 objects with published parallax > 10 mas missing from EDR3 or without EDR3 parallax | main_id, ra, dec, plx_value, plx_bibcode, otype (no magnitudes) |
+| `gcns.hyacob` | 920 Hyades + 212 Coma Ber candidates | source_id, name, c_cluster (small = probable member), dist_cluster (pc from barycentre) |
+| `gcns.resolvedss` | resolved binary candidates in GCNS | source_id1, source_id2, separation, mag_diff, proj_sep, bin, bound |
+
+Two consequences for the comparison. (1) The GCNS started from a parallax > 8 mas sample and keeps every object with a non-zero probability of lying within 100 pc; 300 526 objects have dist_50 < 0.1 kpc (`Smart2021`, Sect. 4.2). The fair denominator for "how many of the 100 pc stars do we keep" is therefore GCNS with parallax ≥ 10 mas (or dist_50 < 0.1 kpc), not all 331 312. (2) The GCNS has no `parallax_over_error ≥ 10` cut, so faint stars missing from our download are expected.
+
+**8.3 Hyades reference values and member lists (question 2).**
+
+| Source | Data | Centre | Members | IDs |
+|---|---|---|---|---|
+| `Babusiaux2018`, Table A.3 | DR2 | parallax 21.052 ± 0.065 mas; µα* = 101.005 ± 0.171, µδ = −28.490 ± 0.137 mas/yr; RV 39.96 km/s | 515 | DR2 |
+| `Roeser2019`, Eq. 1 | DR2 | (X, Y, Z) = (−44.77, +0.40, −16.24) pc, i.e. d = 47.6 pc, l = 179.5°, b = −19.9° (converted by us); (U, V, W) = (−42.24, −19.00, −1.48) km/s; tidal radius about 9 pc | 501 within 18 pc, tails 292 + 237 | DR2 |
+| `Lodieu2019Hyades` | DR2 + ground-based | centre at 47.03 ± 0.20 pc | 710 within 30 pc of the centre | DR2 (VizieR J/A+A/623/A35) |
+| `Smart2021`, Sect. 5.5 | EDR3 | barycentre from members within two tidal radii | 920 (630 within 20 pc of the centre, rest in tails); confirms 510 of the 515 `Babusiaux2018` members | EDR3 = DR3 |
+| `HuntReffert2023`/`HuntReffert2024` | DR3, HDBSCAN, nearby field within 250 pc handled in Cartesian coordinates | distance 47.19 pc | see VizieR J/A+A/686/A42 | DR3 |
+
+Notebook 01 section 8.3 used l = 180°, b = −22.4° and (101, −28) mas/yr from memory. The proper motion agrees with `Babusiaux2018`; the centre is about 2.5° off the `Roeser2019` centre in latitude. Decision for 01.1: centre from `Roeser2019`, proper motion from `Babusiaux2018`; truth sets `gcns.hyacob` (main, EDR3 IDs, matches directly) and Hunt & Reffert 2024 (second, same catalogue as notebook 02). `Lodieu2019Hyades` and `Roeser2019` lists use DR2 IDs and would need the `dr2_neighbourhood` cross-match; not used. Note: the BibTeX key `Lodieu2019` is the α Per/Pleiades/Praesepe paper, not the Hyades paper.
+
+**8.4 Why RUWE depends on distance (questions 4 and 5).** High RUWE has two binary regimes: photocentre wobble for orbital periods of about 100 to 5000 d, and marginally resolved pairs for periods ≳ 10⁵ d, where the measured position follows neither component; flux ratios near 1 are affected most (`ElBadry2025ruwe`, Sect. 3). Gaia resolves pairs reliably above about 0.7″, few between 0.18″ and 0.4″ (Fabricius et al. 2021 **[secondhand]**); the GCNS minimum resolvable separation is 0.53″ for equal brightness and grows with ΔG (`Smart2021`, Eq. 2). Separation distributions: solar-type binaries are log-normal in period with mean log P = 5.03 (P in days), about 50 au for a total mass of 1.5 M☉ (`Raghavan2010`); M dwarf companions peak broadly at 4 to 20 au (`Winters2019`). Because angular separation = separation in au / distance in pc, the distance at which a typical binary of a given class falls into the marginally resolved range depends on its separation distribution. Within GCNS, 17 % of sources have RUWE > 1.4 (`ElBadry2025ruwe`). `ipd_frac_multi_peak` in `gcns.main` flags sources with a double peak in the image windows, i.e. probable resolved doubles (`Smart2021`, Sect. 4.2).
+
 ## Sources
 
-Gaia mission pages (DR4 date and content): [Gaia Data Release scenario](https://www.cosmos.esa.int/web/gaia/release), [Gaia Bulletin archive](https://www.cosmos.esa.int/en/web/gaia/bulletin-archive). All other references (DOI, arXiv ID or ADS bibcode) in `docs/literature/references.bib`.
+Gaia mission pages (DR4 date and content): [Gaia Data Release scenario](https://www.cosmos.esa.int/web/gaia/release), [Gaia Bulletin archive](https://www.cosmos.esa.int/en/web/gaia/bulletin-archive). GCNS table descriptions: [gcns.main](https://dc.g-vo.org/tableinfo/gcns.main), [gcns.missing_10mas](https://dc.g-vo.org/tableinfo/gcns.missing_10mas), [gcns.hyacob](https://dc.g-vo.org/tableinfo/gcns.hyacob), [gcns.resolvedss](https://dc.g-vo.org/tableinfo/gcns.resolvedss). Hipparcos on GAVO: [hipparcos.main](https://dc.g-vo.org/tableinfo/hipparcos.main). Cross-match at AIP: [gaiadr3.hipparcos2_best_neighbour](https://gaia.aip.de/metadata/gaiadr3/hipparcos2_best_neighbour/). Hipparcos completeness: [ESA Hipparcos scientific goals](https://www.cosmos.esa.int/web/hipparcos/scientific-goals). All other references (DOI, arXiv ID or ADS bibcode) in `docs/literature/references.bib`.

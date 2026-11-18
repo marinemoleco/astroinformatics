@@ -1,0 +1,6 @@
+-- service: VizieR web interface via astroquery (vizier.cfa.harvard.edu)
+-- retrieved: 2026-11-18T23:30:55
+-- catalogue: Hunt & Reffert 2024, J/A+A/686/A42/members
+-- cluster: Melotte_25
+-- rows: 927
+-- method: query_constraints Name=Melotte_25; columns: ['Name', 'GaiaDR3', 'Prob', 'inrt', 'inrj', 'Gmag', 'Plx', 'RA_ICRS', 'DE_ICRS']

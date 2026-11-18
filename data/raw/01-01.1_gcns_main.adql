@@ -1,0 +1,8 @@
+-- service: GAVO Data Center, Heidelberg (https://dc.g-vo.org/tap)
+-- retrieved: 2026-11-18T23:26:36
+-- rows: 331312
+SELECT source_id, parallax, parallax_error,
+       phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag,
+       phot_g_mean_flux_over_error, phot_bp_mean_flux_over_error, phot_rp_mean_flux_over_error,
+       phot_bp_rp_excess_factor, ruwe, ipd_frac_multi_peak, gcns_prob, dist_1, dist_50
+FROM gcns.main
