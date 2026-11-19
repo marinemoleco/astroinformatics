@@ -1,6 +1,6 @@
 # 01 Gaia: literature step (Pleiades and solar neighbourhood)
 
-Last updated: 2026-11-18 (Section 8 added for sub-notebook 01.1). Written before any code (phase 0). BibTeX keys refer to `docs/literature/references.bib`.
+Last updated: 2026-11-19 (Section 8.5 added after the first run of sub-notebook 01.1). Written before any code (phase 0). BibTeX keys refer to `docs/literature/references.bib`.
 
 Reading limits: most entries below were read as abstracts, arXiv listing pages or open-access excerpts. Items marked **[check]** are decisive for our method and should be read in full by the user. Items marked **[secondhand]** were taken from another paper's summary, not from the original.
 
@@ -93,7 +93,7 @@ Purpose: give each open question of notebook 01 a reference from a paper instead
 | Table | Content | Columns we need |
 |---|---|---|
 | `gcns.main` | 331 312 objects, at least 92 % of stars within 100 pc down to M9 | source_id, parallax, parallax_error, phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag, flux_over_error (G, BP, RP), phot_bp_rp_excess_factor, ruwe, ipd_frac_multi_peak, gcns_prob, wd_prob, dist_1, dist_50 |
-| `gcns.missing_10mas` | 1258 objects with published parallax > 10 mas missing from EDR3 or without EDR3 parallax | main_id, ra, dec, plx_value, plx_bibcode, otype (no magnitudes) |
+| `gcns.missing_10mas` | 1259 objects (count in the GAVO table, 2026-11-18) with published parallax > 10 mas missing from EDR3 or without EDR3 parallax | main_id, ra, dec, plx_value, plx_bibcode, otype (no magnitudes) |
 | `gcns.hyacob` | 920 Hyades + 212 Coma Ber candidates | source_id, name, c_cluster (small = probable member), dist_cluster (pc from barycentre) |
 | `gcns.resolvedss` | resolved binary candidates in GCNS | source_id1, source_id2, separation, mag_diff, proj_sep, bin, bound |
 
@@ -112,6 +112,12 @@ Two consequences for the comparison. (1) The GCNS started from a parallax > 8 ma
 Notebook 01 section 8.3 used l = 180°, b = −22.4° and (101, −28) mas/yr from memory. The proper motion agrees with `Babusiaux2018`; the centre is about 2.5° off the `Roeser2019` centre in latitude. Decision for 01.1: centre from `Roeser2019`, proper motion from `Babusiaux2018`; truth sets `gcns.hyacob` (main, EDR3 IDs, matches directly) and Hunt & Reffert 2024 (second, same catalogue as notebook 02). `Lodieu2019Hyades` and `Roeser2019` lists use DR2 IDs and would need the `dr2_neighbourhood` cross-match; not used. Note: the BibTeX key `Lodieu2019` is the α Per/Pleiades/Praesepe paper, not the Hyades paper.
 
 **8.4 Why RUWE depends on distance (questions 4 and 5).** High RUWE has two binary regimes: photocentre wobble for orbital periods of about 100 to 5000 d, and marginally resolved pairs for periods ≳ 10⁵ d, where the measured position follows neither component; flux ratios near 1 are affected most (`ElBadry2025ruwe`, Sect. 3). Gaia resolves pairs reliably above about 0.7″, few between 0.18″ and 0.4″ (Fabricius et al. 2021 **[secondhand]**); the GCNS minimum resolvable separation is 0.53″ for equal brightness and grows with ΔG (`Smart2021`, Eq. 2). Separation distributions: solar-type binaries are log-normal in period with mean log P = 5.03 (P in days), about 50 au for a total mass of 1.5 M☉ (`Raghavan2010`); M dwarf companions peak broadly at 4 to 20 au (`Winters2019`). Because angular separation = separation in au / distance in pc, the distance at which a typical binary of a given class falls into the marginally resolved range depends on its separation distribution. Within GCNS, 17 % of sources have RUWE > 1.4 (`ElBadry2025ruwe`). `ipd_frac_multi_peak` in `gcns.main` flags sources with a double peak in the image windows, i.e. probable resolved doubles (`Smart2021`, Sect. 4.2).
+
+
+**8.5 Two further explanations for the RUWE peak (added 2026-11-19, after the first run).** The first run refuted the Hyades, the colour cuts, double-peak sources and resolved companions as the cause of the peak at 30 to 50 pc for M_G 5 to 10. Two further leads from the literature:
+
+- *Sky position.* `CastroGinard2024` compute the largest RUWE compatible with a single-star solution as a function of position on the sky; the limit varies across the sky, and a sky-varying threshold gives a more complete binary sample in the GCNS than one sky-averaged value (abstract). Detectability of unresolved binaries peaks for orbital periods near the length of the Gaia observation baseline (abstract). A fixed cut at RUWE 1.4 therefore means a different strictness in different parts of the sky. Our question 5 found that the RUWE failure rate of M_G 5 to 10 at 30 to 50 pc depends on ecliptic latitude.
+- *Apparent magnitude.* For Pleiades sources without a resolved companion within 4″, RUWE depends on apparent magnitude: sensitivity drops towards the faint end near G = 15, with a broad maximum around G ≈ 12 (`Chulkov2025`, Sect. 4.3 and Fig. 2; read as excerpt). Below G = 13 Gaia observes with gates and different window classes, which affects the photometric calibration (Riello et al. 2021 **[secondhand]**, via the caption of Fig. 8 in [A&A 2024, aa47633-23](https://www.aanda.org/articles/aa/full_html/2024/12/aa47633-23/F8.html)). If RUWE responds most strongly to companions near G ≈ 12, the failure rate of a class peaks at the distance where the class appears at G ≈ 12, and that distance moves outward by a factor 10^0.2 = 1.58 for every magnitude brighter. This is my derivation, not a literature statement.
 
 ## Sources
 

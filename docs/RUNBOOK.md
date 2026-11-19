@@ -1,6 +1,6 @@
 # Runbook: how to work with this project
 
-Last updated: 2026-11-16. Master copy lives here on H:. This file is updated at the end of every working session.
+Last updated: 2026-11-19. Master copy lives here on H:. This file is updated at the end of every working session.
 
 ## 1. Quick start (every session)
 1. Connect the USB drive and check that it is still H:.
@@ -61,10 +61,14 @@ The GitHub repository (section 10) is an additional copy of notebooks, figures, 
 - Connection test from the command prompt: `powershell Test-NetConnection gea.esac.esa.int -Port 443` (`TcpTestSucceeded : True` means reachable). Same for `gaia.ari.uni-heidelberg.de` and `gaia.aip.de`.
 - After `shared\gaia_tools.py` has changed, restart the kernel (Kernel, Restart Kernel) so the notebook loads the new version.
 - To force a fresh download (for example after changing the query), delete the FITS file or call the function with `overwrite=True`.
-- Always filter on the server (WHERE clause), never download whole catalogues.
+- Always filter on the server (WHERE clause), never download whole catalogues. Exception: small catalogues that are the reference themselves (notebook 01.1 downloads the GCNS, 331,312 rows, once).
+- GAVO Data Center (Heidelberg, https://dc.g-vo.org/tap) hosts the GCNS tables (`gcns.main`, `gcns.hyacob`, `gcns.resolvedss`, `gcns.missing_10mas`) and `hipparcos.main`. It is not a Gaia mirror, so it is passed explicitly: `query_gaia_cached(adql, path, services=[("GAVO Data Center, Heidelberg", "https://dc.g-vo.org/tap")])`. It was not affected by the ESA downtime. Hipparcos parallaxes there are given in degrees and converted automatically.
+- `_fits_safe()` in `shared\gaia_tools.py` converts text columns with variable length (typical for GAVO tables) to fixed-width strings before the FITS file is written. Restart the kernel after updating `gaia_tools.py`.
+- Hunt & Reffert 2024 members come from VizieR via astroquery (`J/A+A/686/A42/members`); the header of the `.adql` file records this.
 - Before the Gaia DR4 release on 2 December 2026 the archive expects a downtime of a few working days.
 
 ## 7. Known issues
+- `TypeError` from astropy when writing a downloaded table to FITS (column with strings of different lengths, seen with `gcns.hyacob`): fixed by `_fits_safe()`; update `gaia_tools.py` and restart the kernel.
 - lightkurve prints a warning about `tpfmodel` and `oktopus` on import. Harmless, we do not use that submodule.
 - `TimeoutError: [WinError 10060]` or "Status messages could not be retrieved" when querying Gaia: the ESA archive is not reachable (seen on 2026-11-15, home network fine). `query_gaia_cached()` now falls back to the partner data centres automatically.
 - `FileNotFoundError: H:\Astronomie not found` from `config.py`: the drive is not connected or has another letter. Fix the letter in `shared\config.py`.
@@ -77,6 +81,7 @@ The GitHub repository (section 10) is an additional copy of notebooks, figures, 
 ## 8. Working with Claude
 - One chat per notebook inside the Claude project "Astroinformatics". Chat names: "TT Topic, Short description, Notebook N", for example "01 Gaia, Pleiades query and HDBSCAN, Notebook 2". Blog chats: "01 Gaia, Neighbourhood, Blog Part 1". Chats numbered 00 are for setup and planning (for example "00 GitHub-Setup Hobby Astronomy").
 - Numbering (full rules in `docs\NAMING.md`): each topic has a number `TT`, notebooks count within the topic (`NN` = 01, 02, ...). Inside the topic folder `NN` is enough (`projects\01_gaia\notebooks\02_pleiades_membership.ipynb`, `figures\02_...png`). Where all topics meet, `TT-NN` is used: new files in `data\` (`01-02_pleiades_cone_dr3.adql`), commit messages (`01-02: ...`), tags (`01-02`) and chat names.
+- Sub-notebooks `NN.n` (for example `01.1`) follow up a finished notebook; rules in `docs\NAMING.md`. Each check states competing hypotheses and a prediction before the code.
 - Every analysis starts with a literature step (see `docs\literature\`).
 - At the end of each session Claude updates: the project README, this runbook if tools changed, `CHANGELOG.md`, and the glossary.
 - Model and effort: Claude points out at phase transitions when to switch (end of its reply, one line). Rule of thumb: Opus 5.5 (optionally Fable 5.2) at high effort for the literature step, method design, interpretation and hard debugging; Sonnet 5.5 at medium effort for notebooks, plots and queries; Sonnet 5.5 or Haiku 5.5 at low effort for docs and small edits.
@@ -88,7 +93,7 @@ Topic numbers are assigned when a topic starts (see `docs\NAMING.md`).
 
 | TT | Topic | Folder | Notebooks | Question | Status |
 |----|-------|--------|-----------|----------|--------|
-| 01 | Gaia | `projects\01_gaia` | 01 to 04, then DR4 repeat (05 ff.) | Neighbourhood HR diagram, membership, distance and age of the Pleiades | in progress: literature and notebook 01 done, notebook 02 next |
+| 01 | Gaia | `projects\01_gaia` | 01 to 04, then DR4 repeat (05 ff.) | Neighbourhood HR diagram, membership, distance and age of the Pleiades | in progress: literature, notebook 01 and sub-notebook 01.1 done |
 | next | TESS transit | `projects\TT_tess` | from 01 | Transit fit of a known planet candidate | planned |
 | later | Galaxies | assigned at start | | Colour versus morphology (SDSS, Galaxy Zoo) | planned |
 | later | Visual | assigned at start | | Colour image from public FITS data | planned |

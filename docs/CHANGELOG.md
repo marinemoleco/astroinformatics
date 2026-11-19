@@ -2,6 +2,20 @@
 
 Newest entries on top. One entry per working session: what was done, what was decided, what changed in the setup.
 
+## 2026-11-19: 00 Naming and numbering (blog parts)
+- Confirmed the sub-notebook rule `NN.n` (already written into `docs\NAMING.md` on 2026-11-18).
+- `docs\NAMING.md`, section Blog: part numbers are a counter of their own, independent of notebook numbers. Example corrected: Gaia Part 2 = re-evaluation (notebook 01.1, `posts\gaia-part-2-neighbourhood-reevaluation`), Gaia Part 3 = Pleiades (notebook 02). The earlier example "Gaia Part 2: The Pleiades" is withdrawn.
+
+## 2026-11-19: 01 Gaia, Neighbourhood re-evaluation, Notebook 1.1
+- New sub-notebook `projects\01_gaia\notebooks\01.1_neighborhood_reevaluation.ipynb`, run on real data. It resolves the five open questions of notebook 01. Every check states competing hypotheses and a prediction before the code, followed by "How to read it" and a reading field. Nine figures `figures\01.1_*.png`, seven new queries `data\raw\01-01.1_*.adql` (GAVO Data Center, AIP Potsdam, VizieR).
+- Results: see the README of topic 01. Short version: the bright-class rise is only half a Gaia bright-limit effect (the quality cuts add the rest); Hyades window search has purity 0.83 to 0.85 and recall 26 % (56 % of the core); the clean sample keeps 66.7 % of the GCNS volume; the RUWE peak at M_G 5 to 10 is an apparent-magnitude effect (G of about 11 to 13); more visibility periods do not cause more RUWE failures, the raw difference comes from sky position.
+- Predictions that failed or held in part (also in section 9 of the notebook): cause of the bright-class rise, parallax_over_error loss for M_G > 13, double-peak sources as cause of the RUWE peak, sign of the visibility effect. The restricted slope in 7.5 was added after the run and is marked as such.
+- `shared\gaia_tools.py`: new `_fits_safe()` converts text columns of different lengths before writing FITS (a TypeError occurred with `gcns.hyacob`). `query_gaia_cached(..., services=[...])` is used with the GAVO TAP service for the GCNS tables.
+- `docs\literature\references.bib`: added CastroGinard2024 and Chulkov2025 (preprint, abstract and Sect. 4.3 read), 44 entries. `projects\01_gaia\literature.md`: new section 8.5 (RUWE and sky position, apparent magnitude), count of `gcns.missing_10mas` corrected to 1259.
+- `docs\NAMING.md`: rules for sub-notebooks `NN.n` (decided 2026-11-18). Glossary: new terms. Runbook: GAVO TAP and `_fits_safe`.
+- Not tested, open: 607 Hipparcos stars (Hp 8 to 13) without Gaia match; the white dwarfs among the stars found only by us; origin of the negative remainder in the visibility test.
+- Notebook 02 is not part of this entry.
+
 ## 2026-11-16: 01 Gaia, Neighbourhood, Blog Part 1 (renamed after the new scheme)
 - Blog adapted to `docs\NAMING.md`: titles "About me and this project" and "Gaia Part 1: The neighbourhood", post folders `posts\about` and `posts\gaia-part-1-neighbourhood` (URLs without numbers), navbar link "About" updated, `index.qmd` sorts by `[date, title]` (About is listed before Gaia Part 1). `posts\_template` and `blog\README.md` ("Writing a post") follow the new scheme.
 - Gaia Part 1: the Reproduce box links notebook 01 at the fixed commit 28f2881 with the path `projects/01_gaia/...`. The text and figures are unchanged. The post had been uploaded earlier today under the old URLs (`.deploy_manifest.json`).

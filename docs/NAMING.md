@@ -1,6 +1,6 @@
 # Naming and numbering
 
-Decided 2026-11-16, sub-notebooks added 2026-11-18. This file is the single source for all naming rules. Other documents refer to it. This is the master copy; a mirror is kept in the Claude project "Astroinformatics" as `claude/NAMING.md`.
+Decided 2026-11-16, sub-notebooks added 2026-11-18, blog part examples corrected 2026-11-19. This file is the single source for all naming rules. Other documents refer to it. This is the master copy; a mirror is kept in the Claude project "Astroinformatics" as `claude/NAMING.md`.
 
 ## Principle
 
@@ -73,13 +73,21 @@ Files that existed before this rule keep their names (`data/raw/gaia_dr3_100pc_p
 
 ## Blog
 
-- Titles carry no numbers. The about page is `About me and this project`. Posts of a topic are counted as parts: `Topic Part K: Title`, for example `Gaia Part 1: The neighbourhood`, `Gaia Part 2: The Pleiades`. A part can cover several notebooks, including sub-notebooks.
-- Post folders (and thus URLs) carry no numbers either: `posts/about/`, `posts/gaia-part-1-neighbourhood/`, `posts/gaia-part-2-pleiades/`.
+- Titles carry no numbers except the part number. The about page is `About me and this project`. Posts of a topic are counted as parts: `Topic Part K: Title`.
+- Part numbers are a counter of their own, independent of notebook numbers. Parts count blog posts of a topic in the order they are published; a part can cover one notebook, a sub-notebook or several notebooks. Example for topic 01:
+
+| Blog post | Folder (URL) | Notebook |
+|-----------|--------------|----------|
+| Gaia Part 1: The neighbourhood | `posts/gaia-part-1-neighbourhood/` | 01 |
+| Gaia Part 2: Re-evaluating the neighbourhood | `posts/gaia-part-2-neighbourhood-reevaluation/` | 01.1 |
+| Gaia Part 3: The Pleiades (planned) | `posts/gaia-part-3-pleiades/` | 02 |
+
+- Post folders (and thus URLs) carry no leading number: `posts/about/`, `posts/topic-part-k-short-name/`.
 - The post list is sorted by publication date, then title (`sort: [date, title]` in `blog/index.qmd`), because Quarto otherwise sorts alphabetically by title.
 - A post links to the notebook with a fixed commit:
   `https://github.com/marinemoleco/astroinformatics/blob/<commit>/projects/01_gaia/notebooks/01_neighborhood_hrd.ipynb`
 
-## Current chats (state 2026-11-18)
+## Current chats (state 2026-11-19)
 
 - 00 Astronomie-Hobby mit öffentlichen Daten
 - 00 Blog-Plan für Webspace-Dokumentation
@@ -89,6 +97,7 @@ Files that existed before this rule keep their names (`data/raw/gaia_dr3_100pc_p
 - 01 Gaia, Neighbourhood, Blog Part 1
 - 01 Gaia, Pleiades query and HDBSCAN, Notebook 2
 - 01 Gaia, Neighbourhood re-evaluation, Notebook 1.1
+- 01 Gaia, Neighbourhood re-evaluation, Blog Part 2
 
 ## History
 
@@ -96,3 +105,4 @@ Files that existed before this rule keep their names (`data/raw/gaia_dr3_100pc_p
 - 2026-11-16 (morning): notebooks numbered consecutively across all topics, folder renamed to `projects/gaia_pleiades`.
 - 2026-11-16 (evening): this scheme. Folder renamed to `projects/01_gaia`, notebooks count within the topic, `TT-NN` outside the topic folder, blog titles and URLs without numbers.
 - 2026-11-18: sub-notebooks `NN.n` for follow-up checks and alternative approaches to a finished notebook.
+- 2026-11-19: blog part numbers stated as an independent counter; example table corrected (Part 2 = re-evaluation 01.1, Part 3 = Pleiades 02).
